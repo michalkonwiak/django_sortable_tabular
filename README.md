@@ -2,12 +2,13 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/django_sortable_tabular.svg)](https://pypi.org/project/django_sortable_tabular/)
 
+
 `django_sortable_tabular` is a simple and lightweight Django library that enables column sorting for fields displayed in `TabularInline` in the Django admin panel.
 
 ## Author
 
-Michał Konwiak  
-[GitHub](https://github.com/michalkonwiak)
+Michał Konwiak
+[GitHub](https://github.com/michalkonwiak).
 
 ## Features
 
@@ -26,3 +27,27 @@ Michał Konwiak
 
    ```bash
    pip install django_sortable_tabular
+2. Add a package to INSTALLED_APPS section. 
+   ```bash
+   INSTALLED_APPS = [
+       # another apps
+       'django_sortable_tabular',
+   ]
+3. Define a class that extends the `SortableTabularInline` class and use it as you would a standard inline class. Here’s an example:
+   ```bash
+   class CommentAdmin(SortableTabularInline):
+    model = Comment
+
+   class PostAdmin(admin.ModelAdmin):
+       list_display = (
+           "title",
+           "text",
+           "picture",
+           "author"
+       )
+       inlines = [
+           CommentAdmin
+       ]
+
+4. Run `python manage.py collectstatic`
+5. Run server and enjoy
